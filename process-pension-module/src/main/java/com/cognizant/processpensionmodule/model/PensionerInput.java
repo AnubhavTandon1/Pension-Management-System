@@ -10,7 +10,7 @@ public class PensionerInput {
 	private String name;
 	private String dateOfBirth;
 	private String pan;
-	private String aadharNumber;
+	private Long aadharNumber;
 	private boolean isSelfPension;
 	private boolean isFamilyPension;
 

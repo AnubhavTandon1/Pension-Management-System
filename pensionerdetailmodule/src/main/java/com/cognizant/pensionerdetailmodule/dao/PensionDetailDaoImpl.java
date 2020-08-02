@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 
 import lombok.extern.slf4j.Slf4j;
@@ -49,8 +50,12 @@ public class PensionDetailDaoImpl implements PensionDetailDao{
 	}
 
 	@Override
-	public PensionerDetail getPensionserDetail(Long aadharNumber) {
+	public PensionerDetail getPensionserDetail(Long aadharNumber) throws PensionerNotFoundException {
+		if(mapAadharToPensionerDetail.containsKey(aadharNumber))
 		return mapAadharToPensionerDetail.get(aadharNumber);//return either details , null if not found
+		else
+			throw new PensionerNotFoundException("Pensioner Not Found with aadhar Number :"+ aadharNumber);
+	
 	}
 
 }
