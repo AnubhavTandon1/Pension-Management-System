@@ -1,4 +1,4 @@
-package com.pensiondisbursement.dto;
+package com.pensiondisbursement.modeldto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +16,5 @@ public class PensionerBankDetails {
 	private String panId;
 	private Double amount;
 	private String bankName;
-	private BankType bankType;
 
 }

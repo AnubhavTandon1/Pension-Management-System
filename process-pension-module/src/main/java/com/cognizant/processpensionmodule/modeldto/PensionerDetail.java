@@ -17,6 +17,5 @@ public class PensionerDetail {
 	private boolean isFamilyPension;
 	private String bankName;
 	private String accNo;
-	private boolean isPublic;
-	private boolean isPrivate;
+	private String bankType;
 }

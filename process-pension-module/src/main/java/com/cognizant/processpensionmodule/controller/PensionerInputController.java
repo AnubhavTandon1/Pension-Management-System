@@ -30,6 +30,7 @@ public class PensionerInputController {
 	@GetMapping("/pensiondetail")
 	public List<PensionDetail> showPensionerDetails() {
 		log.info("Start Get end Point of PensionerInput....");
+		//set amounts
 		//make ArrayList<PensionDetail> mlist=pensionDetailSrvice.getpnsionListCustomer()--->modeldao-->dao;
 		log.info("End Get end Point of PensionerInput....");
 		return null;
