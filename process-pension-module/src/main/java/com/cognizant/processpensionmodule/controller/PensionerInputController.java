@@ -5,24 +5,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.processpensionmodule.exception.PensionerInputNotFoundException;
+import com.cognizant.processpensionmodule.model.PensionDetail;
 import com.cognizant.processpensionmodule.model.PensionerInput;
+import com.cognizant.processpensionmodule.model.ProcessPensionInput;
+import com.cognizant.processpensionmodule.modeldto.PensionerDetail;
+import com.cognizant.processpensionmodule.restclients.PensionerDetailClient;
 import com.cognizant.processpensionmodule.service.PensionerInputService;
 
 @RestController
 public class PensionerInputController {
 	@Autowired
 	PensionerInputService pensionerInputService;
-	
 	private static final Logger log = LoggerFactory.getLogger(PensionerInputController.class);
 	
 	@GetMapping("/pensiondetail")
-	public void showPensionerDetails(@RequestBody PensionerInput pin) {
-		log.info("================Start Get end Point of PensionerInput=====================");
-		pensionerInputService.calculatePensionAmount(pin);
-		log.info("================End Get end Point of PensionerInput=======================");
+	public List<PensionDetail> showPensionerDetails() {
+		log.info("Start Get end Point of PensionerInput....");
+		//make ArrayList<PensionDetail> mlist=pensionDetailSrvice.getpnsionListCustomer()--->modeldao-->dao;
+		log.info("End Get end Point of PensionerInput....");
+		return null;
+	}
+	
+	//For Feign Client PensionerDetail
+	@Autowired
+	private PensionerDetailClient pensionerDetailClient;
+	@PostMapping("/pensiondetail/ad")
+	public double getDetails(@RequestBody PensionerInput pin) {
+		PensionerDetail pensionerDetail = pensionerDetailClient.getPensionerDetails(pin.getAadharNumber());
+		return (new PensionerInputService()).calculatePensionAmount(pensionerDetail.getSalaryEarned(),pensionerDetail.getAllowances(),pin);
 	}
 }

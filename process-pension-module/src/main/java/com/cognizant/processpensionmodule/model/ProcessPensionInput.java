@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProcessPensionInput {
 	private String aadharNumber;
-	private double pensionAmt;
+	private double pensionAmount;
 }

@@ -6,11 +6,11 @@ import com.cognizant.processpensionmodule.model.PensionerInput;
 @Service
 public class PensionerInputService {
 	
-	public double calculatePensionAmount(PensionerInput pensionerInput) {
+	public double calculatePensionAmount(double salary,double allowances,PensionerInput pensionerInput) {
 		if(pensionerInput.isSelfPension())
-			return 0.8*0.0;
+			return 0.8*salary+allowances;
 		else
-			return 0.5*0.0;
+			return 0.5*salary+allowances;
 	}
 
 }
