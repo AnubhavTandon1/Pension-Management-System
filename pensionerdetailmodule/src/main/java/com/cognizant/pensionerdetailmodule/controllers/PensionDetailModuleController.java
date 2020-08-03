@@ -3,9 +3,11 @@ package com.cognizant.pensionerdetailmodule.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
+import com.cognizant.pensionerdetailmodule.exception.TokenInvalidException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 import com.cognizant.pensionerdetailmodule.service.PensionDetailService;
 
@@ -16,8 +18,8 @@ public class PensionDetailModuleController {
 	private PensionDetailService pensionDetailService;
 	
 	@GetMapping("/pensionerdetailbyaadhaar/{aadharNumber}")
-	public PensionerDetail getPensionerDetail(@PathVariable Long aadharNumber) throws PensionerNotFoundException
+	public PensionerDetail getPensionerDetail(@RequestHeader("Authorization") String token,@PathVariable Long aadharNumber) throws PensionerNotFoundException,TokenInvalidException 
 	{
-		return pensionDetailService.getPensionerDetail(aadharNumber);
+		return pensionDetailService.getPensionerDetail(token, aadharNumber);
 	}
 }

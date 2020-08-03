@@ -9,15 +9,13 @@ import com.cognizant.processpensionmodule.restclients.PensionDisbursementClient;
 
 @Service
 public class PensionDisbursementService {
-	
+
 	@Autowired
 	private PensionDisbursementClient pensionDisbursementClient;
 
-	public Integer getDisbursementCode(ProcessPensionInput processPensionInput)throws PensionerNotFoundException {
-		return pensionDisbursementClient.getPensionDisbursement(processPensionInput);
+	public Integer getDisbursementCode(String token, ProcessPensionInput processPensionInput)
+			throws PensionerNotFoundException {
+		return pensionDisbursementClient.getPensionDisbursement(token, processPensionInput);
 	}
-		
-	
-	
-	
+
 }

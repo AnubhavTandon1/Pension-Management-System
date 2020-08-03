@@ -3,6 +3,7 @@ package com.pensiondisbursement.restclients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.pensiondisbursement.exception.PensionerNotFoundException;
 import com.pensiondisbursement.model.PensionerDetail;
@@ -11,6 +12,6 @@ import com.pensiondisbursement.model.PensionerDetail;
 public interface PensionerDetailClient {
 	
 	@GetMapping("/pensionerdetailbyaadhaar/{aadharNumber}")
-	PensionerDetail getPensionerDetails(@PathVariable("aadharNumber") Long aadharNumber)throws PensionerNotFoundException; 
+	PensionerDetail getPensionerDetails(@RequestHeader("Authorization") String token,@PathVariable("aadharNumber") Long aadharNumber)throws PensionerNotFoundException; 
 
 }

@@ -3,10 +3,11 @@ package com.cognizant.pensionerdetailmodule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import com.cognizant.pensionerdetailmodule.swagger.SwaggerFilter;
 
-
+@EnableFeignClients
 @SpringBootApplication
 public class PensionerdetailmoduleApplication {
 

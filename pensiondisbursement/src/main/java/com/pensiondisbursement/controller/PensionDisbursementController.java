@@ -3,6 +3,7 @@ package com.pensiondisbursement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pensiondisbursement.exception.PensionerNotFoundException;
@@ -15,8 +16,8 @@ public class PensionDisbursementController {
 	private PensionDisbursementService pensionDisbursementService;
 
 	@PostMapping("/disbursepension")
-	public Integer getPensionDisbursement(@RequestBody ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
-		return pensionDisbursementService.getPensionDisbursement(processPensionInput);
+	public Integer getPensionDisbursement(@RequestHeader("Authorization") String token, @RequestBody ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
+		return pensionDisbursementService.getPensionDisbursement(token,processPensionInput);
 	}
 
 }
