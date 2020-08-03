@@ -1,15 +1,14 @@
 package com.pensiondisbursement.model;
 
-import java.util.HashMap;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
-//This model is input model for REQ3
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProcessPensionInput {
-	private Long aadhar;
-	private Double pensionAmount;
-	private int bankServiceCharge;
-
+	private Long aadharNumber;
+	private double pensionAmount;
+	private double bankCharge;
 }

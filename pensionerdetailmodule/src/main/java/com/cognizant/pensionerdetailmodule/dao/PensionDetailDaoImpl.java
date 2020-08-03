@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 public class PensionDetailDaoImpl implements PensionDetailDao{
 	
 	private static List<String> pensionerList;//each element refers to the details of each pensioner as consolidated String
-	//private static List<PensionerDetail> pensionerDetailList;//each element refers to the PensionerDetail Object
 	private static Map<Long,PensionerDetail> mapAadharToPensionerDetail;
 	static {
 		try {
@@ -33,13 +32,11 @@ public class PensionDetailDaoImpl implements PensionDetailDao{
 			else
 			{
 				mapAadharToPensionerDetail=new HashMap<>();
-				//pensionerDetailList=new ArrayList<>();
 				for(String line:pensionerList)
 				{
 					String []value=line.split(",");
 					PensionerDetail pensionerDetail=new PensionerDetail(value[1],value[2],value[3],Double.valueOf(value[4]),Double.valueOf(value[5]),Boolean.valueOf(value[6]),Boolean.valueOf(value[7]),value[8],value[9],value[10]);
 					mapAadharToPensionerDetail.put(Long.valueOf(value[0]), pensionerDetail);
-					//pensionerDetailList.add(pensionerDetail);
 				}
 				log.debug("Pensioner Detail List : {}",mapAadharToPensionerDetail);
 			}
@@ -50,7 +47,7 @@ public class PensionDetailDaoImpl implements PensionDetailDao{
 	}
 
 	@Override
-	public PensionerDetail getPensionserDetail(Long aadharNumber) throws PensionerNotFoundException {
+	public PensionerDetail getPensionserDetail(Long aadharNumber) throws PensionerNotFoundException  {
 		if(mapAadharToPensionerDetail.containsKey(aadharNumber))
 		return mapAadharToPensionerDetail.get(aadharNumber);//return either details , null if not found
 		else

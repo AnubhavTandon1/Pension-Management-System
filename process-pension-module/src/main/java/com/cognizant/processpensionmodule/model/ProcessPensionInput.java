@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProcessPensionInput {
-	private String aadharNumber;
+	private Long aadharNumber;
 	private double pensionAmount;
+	private double bankCharge;
 }

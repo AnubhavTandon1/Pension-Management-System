@@ -1,37 +1,42 @@
 package com.pensiondisbursement.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pensiondisbursement.exception.PensionerNotFoundException;
+import com.pensiondisbursement.model.PensionerDetail;
 import com.pensiondisbursement.model.ProcessPensionInput;
-import com.pensiondisbursement.modeldto.PensionerBankDetails;
-import com.pensiondisbursement.restclients.PensionerDetailsClient;
+import com.pensiondisbursement.restclients.PensionerDetailClient;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class PensionDisbursementService {
+	
 	@Autowired
-	private PensionerDetailsClient pensionerDetailsClient;
+	private PensionerDetailClient pensionerDetailClient;
 
-	public Optional<String> getPensionDisbursement(ProcessPensionInput processPensionInput) {
-		log.info("Getting bank details for pension details:{}", processPensionInput);
-		Long aadhar = processPensionInput.getAadhar();
-		PensionerBankDetails pensionerBankDetails = pensionerDetailsClient.getPensionerBankDetails(aadhar);
-		log.info("Found pensioner bank details:{} for aadhar:{} from PensionerDetails(REQ2) Service",
-				pensionerBankDetails, aadhar);
-		// It is a business logic to check pension disbursement
-		if (pensionerBankDetails.getAmount() >= processPensionInput.getPensionAmount()) {
-			log.info("Pension is disbursed for aadhar:{} and bank account no.:{}", aadhar,
-					pensionerBankDetails.getAccountNumber());
-			return Optional.of("SUCCESS");
+	public Integer getPensionDisbursement(ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
+		PensionerDetail pensionDetail=getPensionDetail(processPensionInput.getAadharNumber());
+		String bankType=pensionDetail.getBankType();
+		Double bankCharge=processPensionInput.getBankCharge();
+		switch(bankType) {
+			case "Private":
+				if(bankCharge==550)
+					return 10;//Pension disbursement Success  	
+				else if(bankCharge<550)
+					return 20;//Bank service charge not paid 
+					return 21;
+			case "Public":
+				if(bankCharge==500)
+					return 10;//Pension disbursement Success  	
+				else if(bankCharge<500)
+					return 20;//Bank service charge not paid 
+					return 21;
+			default :
+				return 21;
 		}
-		log.error("Pension is not disbursed for aadhar:{} and bank account no.:{}", aadhar,
-				pensionerBankDetails.getAccountNumber());
-		return Optional.empty();
-
 	}
+	
+	public PensionerDetail getPensionDetail(Long aadharNumber) throws PensionerNotFoundException {
+		return pensionerDetailClient.getPensionerDetails(aadharNumber);
+		}
 }
