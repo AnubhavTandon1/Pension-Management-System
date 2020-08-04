@@ -8,7 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.cognizant.pensionerdetailmodule.controllers.PensionDetailModuleController;
+
+import com.cognizant.pensionerdetailmodule.controller.PensionDetailModuleController;
 import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.exception.TokenInvalidException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;

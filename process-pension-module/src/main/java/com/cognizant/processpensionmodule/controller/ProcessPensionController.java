@@ -28,7 +28,7 @@ public class ProcessPensionController {
 		return pensionDetailService.getPensionDetail(token, pensionerInput);
 	}
 
-	@PostMapping("/processpension") // on confirmation by Admin he will use this method with bankservicecharge;
+	@PostMapping("/pensionprocess") // on confirmation by Admin he will use this method with bankservicecharge;
 	public Integer getDisbursementCode(@RequestHeader("Authorization") String token,
 			@RequestBody ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
 

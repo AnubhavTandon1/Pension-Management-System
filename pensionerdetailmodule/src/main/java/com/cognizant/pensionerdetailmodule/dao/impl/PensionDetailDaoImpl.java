@@ -1,4 +1,4 @@
-package com.cognizant.pensionerdetailmodule.dao;
+package com.cognizant.pensionerdetailmodule.dao.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.cognizant.pensionerdetailmodule.dao.PensionDetailDao;
 import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 

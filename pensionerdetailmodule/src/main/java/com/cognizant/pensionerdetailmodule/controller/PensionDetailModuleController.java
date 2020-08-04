@@ -1,4 +1,4 @@
-package com.cognizant.pensionerdetailmodule.controllers;
+package com.cognizant.pensionerdetailmodule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,11 @@ public class PensionDetailModuleController {
 	@Autowired
 	private PensionDetailService pensionDetailService;
 	
-	@GetMapping("/pensionerdetailbyaadhaar/{aadharNumber}")
+	/**
+	 * REST end point 
+	 * GET the PensionerDetial using aadharNumber
+	 */
+	@GetMapping("/pensionerdetail/{aadharNumber}")
 	public PensionerDetail getPensionerDetail(@RequestHeader("Authorization") String token,@PathVariable Long aadharNumber) throws PensionerNotFoundException,TokenInvalidException 
 	{
 		return pensionDetailService.getPensionerDetail(token, aadharNumber);

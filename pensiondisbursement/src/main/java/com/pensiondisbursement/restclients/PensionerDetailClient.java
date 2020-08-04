@@ -11,7 +11,7 @@ import com.pensiondisbursement.model.PensionerDetail;
 @FeignClient(name="pensionerdetailmodule-service", url="http://localhost:8082")
 public interface PensionerDetailClient {
 	
-	@GetMapping("/pensionerdetailbyaadhaar/{aadharNumber}")
+	@GetMapping("/pensionerdetail/{aadharNumber}")
 	PensionerDetail getPensionerDetails(@RequestHeader("Authorization") String token,@PathVariable("aadharNumber") Long aadharNumber)throws PensionerNotFoundException; 
 
 }

@@ -13,6 +13,12 @@ public class PensionDisbursementService {
 	
 	@Autowired
 	private PensionerDetailClient pensionerDetailClient;
+	
+	private final static int SUCCESS=10;
+	private final static int PAYCREDIT=20;
+	private final static int UNKNOWN=21;
+	private final static String PUBLIC="Public";
+	private final static String PRIVATE="Private";
 
 	public Integer getPensionDisbursement(String token,ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
 		PensionerDetail pensionDetail=getPensionDetail(token,processPensionInput.getAadharNumber());
@@ -21,22 +27,22 @@ public class PensionDisbursementService {
 		
 		
 		switch(bankType) {
-			case "Private":
+			case PRIVATE:
 				if(bankCharge==550)
-					return 10;//Pension disbursement Success  	
+					return SUCCESS;//Pension disbursement Success  	
 				else if(bankCharge==0)
-					return 20;//Bank service charge not paid now it should pe paid
+					return PAYCREDIT;//Bank service charge not paid now it should pe paid
 					break;
-			case "Public":
+			case PUBLIC:
 				if(bankCharge==500)
-					return 10;//Pension disbursement Success  	
+					return SUCCESS;//Pension disbursement Success  	
 				else if(bankCharge==0)
-					return 20;//Bank service charge not paid 
+					return PAYCREDIT;//Bank service charge not paid 
 				break;	
 			default :
-				return 21;//Bank service charge less or greater than required
+				return UNKNOWN;//Bank service charge less or greater than required
 		}
-		return 21;
+		return UNKNOWN;
 	}
 	
 	public PensionerDetail getPensionDetail(String token,Long aadharNumber) throws PensionerNotFoundException {
