@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.pensionerdetailmodule.dao.impl.PensionDetailDaoImpl;
-import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.exception.TokenInvalidException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 import com.cognizant.pensionerdetailmodule.restclients.AuthorizationServiceClient;
@@ -22,10 +21,13 @@ public class PensionDetailService {
 	private AuthorizationServiceClient authClient;
 	
 	
-	public PensionerDetail getPensionerDetail(String token,Long aadharNumber) throws PensionerNotFoundException, TokenInvalidException {
+	public PensionerDetail getPensionerDetail(String token,Long aadharNumber) throws TokenInvalidException {
 		boolean response=authClient.validateAndReturnUser(token);
-		if(response)
-		return pensionDetailDaoImpl.getPensionserDetail(aadharNumber);
+		if(response) {
+			
+			log.debug("Pension etail Service {}",pensionDetailDaoImpl.getPensionserDetail(aadharNumber));	
+			return pensionDetailDaoImpl.getPensionserDetail(aadharNumber);
+		}
 		else
 		{
 			log.error("user unathorized");

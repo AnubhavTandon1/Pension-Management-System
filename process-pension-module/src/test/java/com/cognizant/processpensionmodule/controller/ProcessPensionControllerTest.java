@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.cognizant.processpensionmodule.exception.PensionerNotFoundException;
 import com.cognizant.processpensionmodule.exception.TokenInvalidException;
 import com.cognizant.processpensionmodule.model.PensionDetail;
 import com.cognizant.processpensionmodule.model.PensionerInput;
@@ -30,7 +29,7 @@ public class ProcessPensionControllerTest {
 	private PensionDisbursementService pensionDisbursementService;
 
 	@Test
-	public void testGetPensionDetail() throws PensionerNotFoundException, TokenInvalidException {
+	public void testGetPensionDetail() throws TokenInvalidException {
 		String token = "dummyToken";
 
 		PensionerInput input = new PensionerInput("Sanjay Guleria", "21/03/1974", "AAA12569CC", 546789641236L, true,
@@ -44,7 +43,7 @@ public class ProcessPensionControllerTest {
 	}
 
 	@Test
-	public void testGetDisbursementCode() throws PensionerNotFoundException, TokenInvalidException {
+	public void testGetDisbursementCode() throws TokenInvalidException {
 		String token = "dummyToken";
 		ProcessPensionInput ppi = new ProcessPensionInput(546789641236L, 15600.0, 550.0);
 		ProcessPensionInput ppi2 = new ProcessPensionInput(546789641236L, 15600.0, 0.0);

@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.pensiondisbursement.exception.PensionerNotFoundException;
 import com.pensiondisbursement.exception.TokenInvalidException;
 import com.pensiondisbursement.model.ProcessPensionInput;
 import com.pensiondisbursement.service.PensionDisbursementService;
@@ -22,7 +21,7 @@ public class PensionDisbursementControllerTest {
 	private PensionDisbursementService pensionDisbursementService;
 
 	@Test
-	public void testGetPensionDisbursement() throws PensionerNotFoundException, TokenInvalidException {
+	public void testGetPensionDisbursement() throws TokenInvalidException {
 		String token = "dummyToken";
 		ProcessPensionInput ppi = new ProcessPensionInput(546789641236L, 15600.0, 550.0);
 		ProcessPensionInput ppi2 = new ProcessPensionInput(546789641236L, 15600.0, 0.0);

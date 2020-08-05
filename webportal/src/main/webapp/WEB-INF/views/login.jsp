@@ -15,7 +15,7 @@
         </head>
 <body style="background-color:lavender">
 <center><h1> web portal</h1> 
- <form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
+ <form:form modelAttribute="login" action="loginProcess" method="post">
                 <table align="center">
                     <tr>
                         <td>

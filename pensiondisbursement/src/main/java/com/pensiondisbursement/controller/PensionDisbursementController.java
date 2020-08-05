@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pensiondisbursement.exception.PensionerNotFoundException;
 import com.pensiondisbursement.exception.TokenInvalidException;
 import com.pensiondisbursement.model.ProcessPensionInput;
 import com.pensiondisbursement.service.PensionDisbursementService;
@@ -17,8 +16,9 @@ public class PensionDisbursementController {
 	private PensionDisbursementService pensionDisbursementService;
 
 	@PostMapping("/disbursepension")
-	public Integer getPensionDisbursement(@RequestHeader("Authorization") String token, @RequestBody ProcessPensionInput processPensionInput) throws PensionerNotFoundException ,TokenInvalidException{
-		return pensionDisbursementService.getPensionDisbursement(token,processPensionInput);
+	public Integer getPensionDisbursement(@RequestHeader("Authorization") String token,
+			@RequestBody ProcessPensionInput processPensionInput) throws TokenInvalidException {
+		return pensionDisbursementService.getPensionDisbursement(token, processPensionInput);
 	}
 
 }

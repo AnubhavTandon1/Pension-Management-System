@@ -44,7 +44,7 @@ public class AuthController {
 		this.jwtUtils = jwtUtils;
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/signin")
 	public ResponseEntity<JwtResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
 		log.debug("Login Request {}", loginRequest);
 		Authentication authentication = authenticationManager.authenticate(
@@ -73,7 +73,7 @@ public class AuthController {
 	@PostMapping("/validate")
 	public boolean validateAndReturnUser(@RequestHeader("Authorization") String token) throws TokenInvalidException {
 		log.debug("in auth controller with jwt {}", token);
-		return jwtUtils.validateJwtToken(token.substring(7));
+		return jwtUtils.validateJwtToken(token);
 
 	}
 }

@@ -6,24 +6,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.exception.TokenInvalidException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 import com.cognizant.pensionerdetailmodule.service.PensionDetailService;
 
 @RestController
 public class PensionDetailModuleController {
-	
+
 	@Autowired
 	private PensionDetailService pensionDetailService;
-	
+
 	/**
-	 * REST end point 
-	 * GET the PensionerDetial using aadharNumber
+	 * REST end point GET the PensionerDetial using aadharNumber
 	 */
 	@GetMapping("/pensionerdetail/{aadharNumber}")
-	public PensionerDetail getPensionerDetail(@RequestHeader("Authorization") String token,@PathVariable Long aadharNumber) throws PensionerNotFoundException,TokenInvalidException 
-	{
+	public PensionerDetail getPensionerDetail(@RequestHeader("Authorization") String token,
+			@PathVariable Long aadharNumber) throws TokenInvalidException {
 		return pensionDetailService.getPensionerDetail(token, aadharNumber);
 	}
 }

@@ -3,7 +3,6 @@ package com.pensiondisbursement.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pensiondisbursement.exception.PensionerNotFoundException;
 import com.pensiondisbursement.model.PensionerDetail;
 import com.pensiondisbursement.model.ProcessPensionInput;
 import com.pensiondisbursement.restclients.PensionerDetailClient;
@@ -20,7 +19,7 @@ public class PensionDisbursementService {
 	private final static String PUBLIC="Public";
 	private final static String PRIVATE="Private";
 
-	public Integer getPensionDisbursement(String token,ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
+	public Integer getPensionDisbursement(String token,ProcessPensionInput processPensionInput) {
 		PensionerDetail pensionDetail=getPensionDetail(token,processPensionInput.getAadharNumber());
 		String bankType=pensionDetail.getBankType();
 		Double bankCharge=processPensionInput.getBankCharge();
@@ -45,7 +44,7 @@ public class PensionDisbursementService {
 		return UNKNOWN;
 	}
 	
-	public PensionerDetail getPensionDetail(String token,Long aadharNumber) throws PensionerNotFoundException {
+	public PensionerDetail getPensionDetail(String token,Long aadharNumber){
 		return pensionerDetailClient.getPensionerDetails(token,aadharNumber);
 		}
 }

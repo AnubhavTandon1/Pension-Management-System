@@ -9,8 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cognizant.pensionerdetailmodule.controller.PensionDetailModuleController;
-import com.cognizant.pensionerdetailmodule.exception.PensionerNotFoundException;
 import com.cognizant.pensionerdetailmodule.exception.TokenInvalidException;
 import com.cognizant.pensionerdetailmodule.models.PensionerDetail;
 import com.cognizant.pensionerdetailmodule.service.PensionDetailService;
@@ -24,7 +22,7 @@ public class PensionDetailControllerTest {
 	private PensionDetailService pensionDetailService;
 
 	@Test
-	public void testGetPensionerDetail() throws PensionerNotFoundException, TokenInvalidException {
+	public void testGetPensionerDetail() throws TokenInvalidException {
 		String token = "dummyToken";
 		PensionerDetail pensionerDetail = new PensionerDetail("Sanjay Guleria", "21/03/1974", "AAA12569CC", 18000, 1200,
 				true, false, "Punjab National Bank", "9999689745", "Public");

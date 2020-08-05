@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import com.cognizant.processpensionmodule.exception.PensionerNotFoundException;
 import com.cognizant.processpensionmodule.exception.TokenInvalidException;
 import com.cognizant.processpensionmodule.model.PensionDetail;
 import com.cognizant.processpensionmodule.model.PensionerInput;
@@ -22,15 +21,15 @@ public class ProcessPensionController {
 	@Autowired
 	private PensionDisbursementService pensionDisbursementService;
 
-	@GetMapping("/pensiondetail")
+	@PostMapping("/pensiondetail")
 	public PensionDetail getPensionDetail(@RequestHeader("Authorization") String token,
-			@RequestBody PensionerInput pensionerInput) throws PensionerNotFoundException, TokenInvalidException {
+			@RequestBody PensionerInput pensionerInput) throws TokenInvalidException {
 		return pensionDetailService.getPensionDetail(token, pensionerInput);
 	}
 
 	@PostMapping("/pensionprocess") // on confirmation by Admin he will use this method with bankservicecharge;
 	public Integer getDisbursementCode(@RequestHeader("Authorization") String token,
-			@RequestBody ProcessPensionInput processPensionInput) throws PensionerNotFoundException {
+			@RequestBody ProcessPensionInput processPensionInput)  {
 
 		return pensionDisbursementService.getDisbursementCode(token, processPensionInput);
 	}
