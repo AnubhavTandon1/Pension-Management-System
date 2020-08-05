@@ -1,5 +1,7 @@
 package com.cognizant.portal.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,7 @@ public class LoginController {
 //	}
 
 	@RequestMapping(value="/login",method=RequestMethod.POST )
-	public String parseLoginPage(@ModelAttribute("pensionerInput") PensionerInput pensionerInput ,@ModelAttribute("login") Login login) {
+	public String parseLoginPage(@Valid @ModelAttribute("pensionerInput") PensionerInput pensionerInput ,@ModelAttribute("login") Login login) {
 		return portalService.getPensionerPage(pensionerInput,login);
 
 	}

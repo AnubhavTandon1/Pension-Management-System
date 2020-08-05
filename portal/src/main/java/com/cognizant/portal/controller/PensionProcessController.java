@@ -4,14 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cognizant.portal.model.Login;
 import com.cognizant.portal.model.PensionerInput;
@@ -25,8 +20,8 @@ public class PensionProcessController {
 	private PortalService pensionProcessService;
 
 	@PostMapping("/submitinfo")
-	public String submitPensionerInfo(@ModelAttribute("pensionerInput") PensionerInput pensionerInput,Model model) {
-		return pensionProcessService.submitPensionInput(pensionerInput,model);
+	public String submitPensionerInfo(@ModelAttribute("pensionerInput") PensionerInput pensionerInput,Model model,@ModelAttribute("login") Login login) {
+		return pensionProcessService.submitPensionInput(pensionerInput,model,login);
 
 	}
 	
@@ -39,6 +34,11 @@ public class PensionProcessController {
 	@PostMapping("/disburse")
 	public String disburseProcess(@ModelAttribute("processPensionInput") ProcessPensionInput processPensionInput) {
 		return pensionProcessService.disburseProcess(processPensionInput);
+	}
+	
+	@GetMapping("/success")
+	public String getSuccessPage() {
+		return "success";
 	}
 
 }

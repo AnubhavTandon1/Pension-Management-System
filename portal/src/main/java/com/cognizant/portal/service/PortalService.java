@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import com.cognizant.portal.clients.AuthServiceClient;
 import com.cognizant.portal.clients.ProcessPensionClient;
 import com.cognizant.portal.exception.TokenInvalidException;
@@ -32,33 +35,40 @@ public class PortalService {
 	@Autowired
 	private PensionTableRepository pensionTableRepository;
 
-	private static int countHit = 0;
+	private int countHit = 1;
 	private static String token;
 
 	public String getPensionerPage(PensionerInput pensionerInput, Login login) {
 		ResponseEntity<JwtResponse> response = null;
-		try {
+		
+		
+		try{
 			response = authServiceClient.authenticateUserAndGetDetails(login);
 			if (response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null) {
 				token = getToken(response);
-				if (authServiceClient.validateToken(token)) {
-					log.debug("Login successfull");
-					return "pensionerdetails";
+				try {
+					if (authServiceClient.validateToken(token)) {
+						log.debug("Login successfull");
+						return "pensionerdetails";
+					}
+				} catch (TokenInvalidException e) {
+					return "tokeninvalid";
 				}
-				
-			}
-		} catch (FeignException | TokenInvalidException e) {
-			log.debug("token invalid page");
-			return "tokeninvalid";
+
+			}}
+		catch(FeignException e)
+		{
+			return "loginagain";
 		}
-		return "login";
+		
+		return "loginagain";
 	}
 
 	public String getToken(ResponseEntity<JwtResponse> response) {
 		return response.getBody().getToken();
 	}
 
-	public String submitPensionInput(PensionerInput pensionerInput, Model model) {
+	public String submitPensionInput(PensionerInput pensionerInput, Model model,Login login) {
 		try {
 			PensionDetail pensionDetail = null;
 
@@ -91,20 +101,22 @@ public class PortalService {
 		try {
 			if (authServiceClient.validateToken(token)) {
 				Integer code = processPensionClient.getDisbursementCode(token, processPensionInput);
-				if (code == 10) {
+				
+				if(code == 0)
+					return "invalidaadhar";
+				
+				else if (code == 10) {
 					pensionTableRepository.save(processPensionInput);
+					countHit=0;
 					return "success";
 				}
 
-				else if (code == 20) {
-					if (countHit == 3) {
-						countHit = 0;
-						return "limitexceeded";
-					}
-					countHit++;
+				else if (code == 20) 
+					{
+					pensionTableRepository.save(processPensionInput);
 					return "paycredit";
-
-				} else {
+					}
+				 else {
 					if (countHit == 3) {
 						countHit = 0;
 						return "limitexceeded";
@@ -115,7 +127,8 @@ public class PortalService {
 				}
 
 			}
-		} catch (FeignClientException | TokenInvalidException e) {
+		} 
+		catch (TokenInvalidException e) {
 			return "tokeninvalid";
 		}
 		return "unknown";

@@ -16,7 +16,7 @@
   </head>
   <body>
   <center>
-    <h1>Pensioner's Details</h1>
+    <h1>Welcome Member</h1>
 </center><br><br>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -28,7 +28,7 @@
  	<div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Name :</label>
     <div class="col-sm-10">
-      <form:input path="name" placeholder="Enter your Name"  class="form-control" />
+      <form:input path="name" placeholder="Enter Pensioner's Name"  class="form-control" required="required"/>
     </div>
   </div>
   
@@ -36,14 +36,14 @@
   <div class="form-group row">
     <label for="dateOfBirth" class="col-sm-2 col-form-label">D.O.B:</label>
     <div class="col-sm-10">
-      <form:input path="dateOfBirth" placeholder="Enter your D.O.B"  class="form-control" />
+      <form:input path="dateOfBirth" placeholder="Enter your D.O.B"  class="form-control" required="required"/>
     </div>
   </div>
  
    <div class="form-group row">
     <label for="pan" class="col-sm-2 col-form-label">PAN Number:</label>
     <div class="col-sm-10">
-      <form:input path="pan" placeholder="Enter your PanCard" class="form-control"  />
+      <form:input path="pan" placeholder="Enter your PanCard" class="form-control"  required="required"/>
     </div>
   </div>
  
@@ -51,7 +51,7 @@
    <div class="form-group row">
     <label for="aadhar" class="col-sm-2 col-form-label">AadharCard Number:</label>
     <div class="col-sm-10">
-      <form:input path="aadharNumber" class="form-control" placeholder="Enter your AadharCard Number"  maxlength="12" pattern="^[1-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$"  />
+      <form:input path="aadharNumber" class="form-control" placeholder="Enter your AadharCard Number"  length="12"  required="required"/>
     </div>
   	  </div>		
   	 

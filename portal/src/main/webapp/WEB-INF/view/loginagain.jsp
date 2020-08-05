@@ -16,8 +16,8 @@
         </head>
 <body style="background-color:lavender">
 <div class="container">
-<center>
-<h1> Pension Management Portal </h1> 
+<center><div>Invalid Credential, Please Login Again </div></center>
+<center><h1> Pension Management Portal </h1> 
  <form:form modelAttribute="login" action="/login" method="post">
                 <table align="center">
                     <tr>
@@ -25,7 +25,7 @@
                             <form:label path="username">User name: </form:label>
                         </td>
                         <td>
-                            <form:input path="username" required="required"/>
+                            <form:input path="username" required="required" />
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +33,7 @@
                             <form:label path="password">Password:</form:label>
                         </td>
                         <td>
-                            <form:password path="password"  required="required"/>
+                            <form:password path="password" required="required" />
                         </td>
                     </tr>
                     <tr>
@@ -46,6 +46,8 @@
                     
                 </table>
             </form:form>
+
+
 </center>
 </div>
 </body>

@@ -15,17 +15,17 @@
     <div class="container" align="center">
         <h2>Enter Pension Process Input</h2>
         <form:form action="/disburse" method="post" modelAttribute="processPensionInput">
-            <form:label path="aadharNumber">Aadhar Number:</form:label>
-            <form:input path="aadharNumber"/><br/>
+            <form:label path="aadharNumber">Aadhar Number :</form:label>
+            <form:input path="aadharNumber"  class="form-control" placeholder="Enter the Pensioner's Aadhar Number"  length="12" required="required"/><br/>
  
             <form:label path="pensionAmount">Pension Amount:</form:label>
-            <form:input path="pensionAmount"/><br/>
+            <form:input path="pensionAmount" class="form-control" placeholder="Enter the Pension Amount" required="required"/><br/>
             
              <form:label path="bankCharge">Bank Charge:</form:label>
-            <form:input path="bankCharge"/><br/>
+            <form:input path="bankCharge" class="form-control"  placeholder="Enter the Bank Charge according to its type" required="required"/><br/>
             
             <input type="submit" value="Submit" >
-			<input type="reset" value="Cancel">
+			<input type="reset" value="Reset">
 
         </form:form>
     </div>

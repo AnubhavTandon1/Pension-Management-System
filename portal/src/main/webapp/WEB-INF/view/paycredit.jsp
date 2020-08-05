@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="container">
-		<h1>Add the correct bank charge to the pension</h1>
-		<a href="http://localhost:8090/disburse" class="btn btn-primary" >Add Correct credit</a>
+		<h1>Add the correct bank charge to the pension...Added afterwords</h1>
+		<a href="http://localhost:8090/success" class="btn btn-primary" >Add Correct credit</a>
 </div>
 </body>
 </html>
