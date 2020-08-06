@@ -20,17 +20,31 @@ public class PensionDisbursementControllerTest {
 	@Mock
 	private PensionDisbursementService pensionDisbursementService;
 
+
 	@Test
-	public void testGetPensionDisbursement() throws TokenInvalidException {
+	public void testGetPensionDisbursementSuccess() throws  TokenInvalidException {
 		String token = "dummyToken";
 		ProcessPensionInput ppi = new ProcessPensionInput(546789641236L, 15600.0, 550.0);
-		ProcessPensionInput ppi2 = new ProcessPensionInput(546789641236L, 15600.0, 0.0);
-		ProcessPensionInput ppi3 = new ProcessPensionInput(546789641236L, 15600.0, 500.0);
 		Mockito.when(pensionDisbursementService.getPensionDisbursement(token, ppi)).thenReturn(10);
-		Mockito.when(pensionDisbursementService.getPensionDisbursement(token, ppi2)).thenReturn(20);
-		Mockito.when(pensionDisbursementService.getPensionDisbursement(token, ppi3)).thenReturn(21);
 		assertEquals(pensionDisbursementController.getPensionDisbursement(token, ppi), 10);
+	}
+
+	@Test
+	public void testGetPensionDisbursementServiceChargeNotPaid()
+			throws  TokenInvalidException {
+		String token = "dummyToken";
+		ProcessPensionInput ppi2 = new ProcessPensionInput(546789641236L, 15600.0, 0.0);
+		Mockito.when(pensionDisbursementService.getPensionDisbursement(token, ppi2)).thenReturn(20);
 		assertEquals(pensionDisbursementController.getPensionDisbursement(token, ppi2), 20);
+	}
+
+	@Test
+	public void testGetPensionDisbursementUnkownError() throws  TokenInvalidException {
+		String token = "dummyToken";
+		ProcessPensionInput ppi3 = new ProcessPensionInput(546789641236L, 15600.0, 500.0);
+		Mockito.when(pensionDisbursementService.getPensionDisbursement(token, ppi3)).thenReturn(21);
 		assertEquals(pensionDisbursementController.getPensionDisbursement(token, ppi3), 21);
 	}
+
+
 }

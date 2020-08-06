@@ -9,5 +9,9 @@ class PensionerdetailmoduleApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	public void main() {
+		PensionerdetailmoduleApplication.main(new String[] {});
+	}
 
 }

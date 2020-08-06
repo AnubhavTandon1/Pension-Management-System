@@ -38,7 +38,7 @@ public class PensionDetailDaoImpl implements PensionDetailDao {
 			log.debug("Pensioner Detail List : {}", mapAadharToPensionerDetail);
 
 		} catch (IOException | ResponseStatusException e) {
-			mapAadharToPensionerDetail.clear();
+			//mapAadharToPensionerDetail.clear();
 		}
 	}
 

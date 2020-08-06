@@ -23,14 +23,11 @@ public class PensionDetailService {
 	
 	public PensionerDetail getPensionerDetail(String token,Long aadharNumber) throws TokenInvalidException {
 		boolean response=authClient.validateAndReturnUser(token);
-		if(response) {
-			
-			log.debug("Pension etail Service {}",pensionDetailDaoImpl.getPensionserDetail(aadharNumber));	
+		if(response) {	
 			return pensionDetailDaoImpl.getPensionserDetail(aadharNumber);
 		}
 		else
 		{
-			log.error("user unathorized");
 			throw new TokenInvalidException("USER UNAUTHORIZED");
 		}
 	}

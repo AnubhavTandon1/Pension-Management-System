@@ -9,5 +9,9 @@ class PensiondisbursementApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	public void main() {
+		PensiondisbursementApplication.main(new String[] {});
+	}
 
 }
